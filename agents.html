@@ -230,13 +230,18 @@
       pointer-events: none;
     }
 
-    .agent-tile svg {
+    .agent-tile svg,
+    .agent-tile .agent-img {
       width: 48px;
       height: 48px;
       display: block;
       transition: var(--transition-spring);
       position: relative;
       z-index: 1;
+    }
+
+    .agent-tile .agent-img {
+      object-fit: contain;
     }
 
     /* Hover Lift & Brand Glow */
@@ -250,7 +255,8 @@
       opacity: 0.35;
     }
 
-    .agent-item:hover .agent-tile svg {
+    .agent-item:hover .agent-tile svg,
+    .agent-item:hover .agent-tile .agent-img {
       transform: scale(1.08);
     }
 
@@ -305,11 +311,11 @@
     .agent-item.claude { --glow-color: rgba(217, 119, 87, 0.45); }
     .agent-item.claude .agent-tile svg { fill: #d97757; }
 
-    /* 4. Codex (Microsoft) */
-    .agent-item.codex { --glow-color: rgba(123, 97, 255, 0.45); }
+    /* 4. Copilot (Microsoft) */
+    .agent-item.copilot { --glow-color: rgba(16, 157, 242, 0.45); }
     
     /* 5. Muse (Meta) */
-    .agent-item.muse { --glow-color: rgba(160, 51, 255, 0.45); }
+    .agent-item.muse { --glow-color: rgba(0, 109, 238, 0.5); }
 
     /* 6. Siri (Apple) */
     .agent-item.siri { --glow-color: rgba(239, 122, 255, 0.45); }
@@ -319,7 +325,7 @@
     .agent-item.alexa .agent-tile svg { fill: #00caff; }
 
     /* 8. Grok (xAI) */
-    .agent-item.grok { --glow-color: rgba(0, 240, 255, 0.4); }
+    .agent-item.grok { --glow-color: rgba(255, 255, 255, 0.4); }
 
     /* 9. Mistral (Mistral AI) */
     .agent-item.mistral { --glow-color: rgba(255, 112, 0, 0.45); }
@@ -397,8 +403,8 @@
         <stop offset="100%" stop-color="#ff5499" />
       </linearGradient>
 
-      <!-- Microsoft Codex Copilot Gradient -->
-      <linearGradient id="codex-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <!-- Microsoft Copilot Gradient -->
+      <linearGradient id="copilot-grad" x1="0%" y1="0%" x2="100%" y2="100%">
         <stop offset="0%" stop-color="#00a4ef" />
         <stop offset="50%" stop-color="#7b61ff" />
         <stop offset="100%" stop-color="#ff5964" />
@@ -459,7 +465,7 @@
     <div class="grid-wrapper">
       <div class="agents-grid" role="list">
 
-        <!-- ROW 1 (6 Agents): Dot, Gem, Claude, Codex, Muse, Siri -->
+        <!-- ROW 1 (6 Agents): Dot, Gem, Claude, Copilot, Muse, Siri -->
 
         <!-- 1. OpenAI: Dot -->
         <div class="agent-item dot" role="listitem">
@@ -500,15 +506,39 @@
           </div>
         </div>
 
-        <!-- 4. Microsoft: Codex -->
-        <div class="agent-item codex" role="listitem">
-          <div class="agent-tile" title="Codex by Microsoft">
-            <svg viewBox="0 0 24 24" role="img" aria-label="Microsoft Codex">
-              <path fill="url(#codex-grad)" d="M23.922 16.997C23.061 18.492 18.063 22.02 12 22.02 5.937 22.02.939 18.492.078 16.997A.641.641 0 0 1 0 16.741v-2.869a.883.883 0 0 1 .053-.22c.372-.935 1.347-2.292 2.605-2.656.167-.429.414-1.055.644-1.517a10.098 10.098 0 0 1-.052-1.086c0-1.331.282-2.499 1.132-3.368.397-.406.89-.717 1.474-.952C7.255 2.937 9.248 1.98 11.978 1.98c2.731 0 4.767.957 6.166 2.093.584.235 1.077.546 1.474.952.85.869 1.132 2.037 1.132 3.368 0 .368-.014.733-.052 1.086.23.462.477 1.088.644 1.517 1.258.364 2.233 1.721 2.605 2.656a.841.841 0 0 1 .053.22v2.869a.641.641 0 0 1-.078.256Zm-11.75-5.992h-.344a4.359 4.359 0 0 1-.355.508c-.77.947-1.918 1.492-3.508 1.492-1.725 0-2.989-.359-3.782-1.259a2.137 2.137 0 0 1-.085-.104L4 11.746v6.585c1.435.779 4.514 2.179 8 2.179 3.486 0 6.565-1.4 8-2.179v-6.585l-.098-.104s-.033.045-.085.104c-.793.9-2.057 1.259-3.782 1.259-1.59 0-2.738-.545-3.508-1.492a4.359 4.359 0 0 1-.355-.508Zm2.328 3.25c.549 0 1 .451 1 1v2c0 .549-.451 1-1 1-.549 0-1-.451-1-1v-2c0-.549.451-1 1-1Zm-5 0c.549 0 1 .451 1 1v2c0 .549-.451 1-1 1-.549 0-1-.451-1-1v-2c0-.549.451-1 1-1Zm3.313-6.185c.136 1.057.403 1.913.878 2.497.442.544 1.134.938 2.344.938 1.573 0 2.292-.337 2.657-.751.384-.435.558-1.15.558-2.361 0-1.14-.243-1.847-.705-2.319-.477-.488-1.319-.862-2.824-1.025-1.487-.161-2.192.138-2.533.529-.269.307-.437.808-.438 1.578v.021c0 .265.021.562.063.893Zm-1.626 0c.042-.331.063-.628.063-.894v-.02c-.001-.77-.169-1.271-.438-1.578-.341-.391-1.046-.69-2.533-.529-1.505.163-2.347.537-2.824 1.025-.462.472-.705 1.179-.705 2.319 0 1.211.175 1.926.558 2.361.365.414 1.084.751 2.657.751 1.21 0 1.902-.394 2.344-.938.475-.584.742-1.44.878-2.497Z"/>
+        <!-- 4. Microsoft: Copilot -->
+        <div class="agent-item copilot" role="listitem">
+          <div class="agent-tile" title="Copilot by Microsoft">
+            <!-- Official Microsoft Copilot Multi-Colored Ribbon -->
+            <svg viewBox="-1 15 513 481" role="img" aria-label="Microsoft Copilot">
+              <defs>
+                <radialGradient id="copilot-rad-1" cx="987.21" cy="1216.02" fx="987.21" fy="1216.02" r="2" gradientTransform="translate(-402710.6509 -405348.4949) rotate(116.7194) scale(232.2644 -445.8898) skewX(-9.7245)" gradientUnits="userSpaceOnUse">
+                  <stop offset=".25" stop-color="#109df2"/>
+                  <stop offset=".72" stop-color="#aad445"/>
+                  <stop offset=".97" stop-color="#ffd400"/>
+                </radialGradient>
+                <linearGradient id="copilot-lin-1" x1="175.87" y1="498.29" x2="173.86" y2="137.69" gradientTransform="translate(0 514) scale(1 -1)" gradientUnits="userSpaceOnUse">
+                  <stop offset="0" stop-color="#3dcbff"/>
+                  <stop offset=".25" stop-color="#0588f7" stop-opacity="0"/>
+                </linearGradient>
+                <radialGradient id="copilot-rad-2" cx="987.17" cy="1215.84" fx="987.17" fy="1215.84" r="2" gradientTransform="translate(-214974.3479 -373904.6811) rotate(116.0466) scale(242.0348 -294.2735) skewX(.4853)" gradientUnits="userSpaceOnUse">
+                  <stop offset=".07" stop-color="#8c48ff"/>
+                  <stop offset=".5" stop-color="#f2598a"/>
+                  <stop offset=".9" stop-color="#ffb152"/>
+                </radialGradient>
+                <linearGradient id="copilot-lin-2" x1="337.55" y1="400.48" x2="337.35" y2="302.27" gradientTransform="translate(0 514) scale(1 -1)" gradientUnits="userSpaceOnUse">
+                  <stop offset=".06" stop-color="#f8adfa"/>
+                  <stop offset=".71" stop-color="#a86edd" stop-opacity="0"/>
+                </linearGradient>
+              </defs>
+              <path fill="url(#copilot-rad-1)" d="M347.3,115.17l-5.16,20.63h-49.62c-36.77,0-68.82,25.03-77.74,60.7l-44.92,179.7h-89.69c-52.13,0-90.38-48.99-77.74-99.57L47.46,96.53C59.35,48.97,102.08,15.6,151.11,15.6h118.45c52.13,0,90.38,48.99,77.74,99.57Z"/>
+              <path fill="url(#copilot-lin-1)" d="M347.3,115.17l-5.16,20.63h-49.62c-36.77,0-68.82,25.03-77.74,60.7l-44.92,179.7h-89.69c-52.13,0-90.38-48.99-77.74-99.57L47.46,96.53C59.35,48.97,102.08,15.6,151.11,15.6h118.45c52.13,0,90.38,48.99,77.74,99.57Z"/>
+              <path fill="url(#copilot-rad-2)" d="M164.7,396.83l5.16-20.63h49.62c36.77,0,68.82-25.03,77.74-60.7l44.92-179.7h89.69c52.13,0,90.38,48.99,77.74,99.57l-45.02,180.1c-11.89,47.56-54.63,80.93-103.66,80.93h-118.45c-52.13,0-90.38-48.99-77.74-99.57Z"/>
+              <path fill="url(#copilot-lin-2)" d="M164.7,396.83l5.16-20.63h49.62c36.77,0,68.82-25.03,77.74-60.7l44.92-179.7h89.69c52.13,0,90.38,48.99,77.74,99.57l-45.02,180.1c-11.89,47.56-54.63,80.93-103.66,80.93h-118.45c-52.13,0-90.38-48.99-77.74-99.57Z"/>
             </svg>
           </div>
           <div class="agent-info">
-            <span class="agent-name">Codex</span>
+            <span class="agent-name">Copilot</span>
             <span class="agent-company">Microsoft</span>
           </div>
         </div>
@@ -516,9 +546,7 @@
         <!-- 5. Meta: Muse -->
         <div class="agent-item muse" role="listitem">
           <div class="agent-tile" title="Muse by Meta">
-            <svg viewBox="0 0 24 24" role="img" aria-label="Meta Muse">
-              <path fill="url(#meta-grad)" d="M10.73.032c-1.333 0-2.032 1.016-2.032 2.285 0 2.223 2.127 4.953 4.318 4.953 1.301 0 2-.953 2-2.254 0-2.254-2.095-4.984-4.286-4.984m8.413 2.984c-1.968 0-3.397 2.73-3.397 4.825 0 1.556.794 3.016 2.254 3.016 2 0 3.365-2.762 3.365-4.794 0-1.523-.762-3.047-2.222-3.047M4.857 4.159c-1.968 0-3.778 1.016-3.778 2.54 0 1.65 2.16 2.793 4.254 2.793 1.873 0 3.778-.92 3.778-2.508 0-1.682-2.159-2.825-4.254-2.825m-.222 6.476C2.413 10.635 0 13.175 0 15.397c0 1.301.825 2.159 2.095 2.159 2.19 0 4.603-2.508 4.603-4.794 0-1.27-.761-2.127-2.063-2.127m16.667.698c-2.223 0-5.016 1.62-5.016 3.651 0 1.238 1.047 2.19 2.698 2.19 2.159 0 5.016-1.587 5.016-3.682 0-1.302-1.08-2.159-2.698-2.159M7.619 16c-1.524 0-2.38 1.746-2.38 3.429 0 2.063 1.269 4.54 3.047 4.54 1.524 0 2.38-1.81 2.38-3.461C10.667 18.57 9.46 16 7.62 16m6.571 1.016c-1.333 0-2.476.667-2.476 2.032 0 2.095 2.667 4.063 4.92 4.063 1.366 0 2.54-.73 2.54-2.063 0-2.032-2.698-4.032-4.984-4.032"/>
-            </svg>
+            <img src="muse.webp" alt="Meta Muse" class="agent-img" />
           </div>
           <div class="agent-info">
             <span class="agent-name">Muse</span>
@@ -588,10 +616,10 @@
         <!-- 8. xAI: Grok -->
         <div class="agent-item grok" role="listitem">
           <div class="agent-tile" title="Grok by xAI">
-            <!-- Official Grok Mark -->
-            <svg viewBox="0 0 164 164" role="img" aria-label="xAI Grok">
-              <polygon points="38.7 129.2 58.7 129.2 125 34.5 105 34.5" fill="url(#grok-grad)"/>
-              <path d="M42 34.5h20l64.3 94.7h-20z" fill="#ffffff" opacity="0.85"/>
+            <!-- Official Grok Icon (Wikimedia Commons) -->
+            <svg viewBox="0 0 512 510" role="img" aria-label="xAI Grok">
+              <path fill="#0d0d11" d="M115.612 0h280.776C459.975 0 512 52.026 512 115.612v278.416c0 63.587-52.025 115.613-115.612 115.613H115.612C52.026 509.641 0 457.615 0 394.028V115.612C0 52.026 52.026 0 115.612 0z"/>
+              <path fill="#ffffff" d="M213.235 306.019l178.976-180.002v.169l51.695-51.763c-.924 1.32-1.86 2.605-2.785 3.89-39.281 54.164-58.46 80.649-43.07 146.922l-.09-.101c10.61 45.11-.744 95.137-37.398 131.836-46.216 46.306-120.167 56.611-181.063 14.928l42.462-19.675c38.863 15.278 81.392 8.57 111.947-22.03 30.566-30.6 37.432-75.159 22.065-112.252-2.92-7.025-11.67-8.795-17.792-4.263l-124.947 92.341zm-25.786 22.437l-.033.034L68.094 435.217c7.565-10.429 16.957-20.294 26.327-30.149 26.428-27.803 52.653-55.359 36.654-94.302-21.422-52.112-8.952-113.177 30.724-152.898 41.243-41.254 101.98-51.661 152.706-30.758 11.23 4.172 21.016 10.114 28.638 15.639l-42.359 19.584c-39.44-16.563-84.629-5.299-112.207 22.313-37.298 37.308-44.84 102.003-1.128 143.81z"/>
             </svg>
           </div>
           <div class="agent-info">
